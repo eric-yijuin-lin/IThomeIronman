@@ -36,7 +36,7 @@ namespace Ithome_2021_API
             services.AddSingleton<IConfiguration>(Configuration);
 
             // 加入這一行
-            services.AddScoped<IUserCRUD, UserServiceWithFile>();
+            services.AddScoped<IUserCRUD, UserService>();
 
             services.Configure<UserServiceOptions>(
                 Configuration.GetSection("TestConfiguration"));
