@@ -37,10 +37,12 @@ namespace Ithome_2021_API
             services.AddSingleton<IConfiguration>(Configuration);
 
             // 加入這一行
-            services.AddScoped<IUserCRUD, UserService>();
+            services.AddScoped<IUserCRUD, UserServiceWithMySQL>();
 
             services.Configure<UserServiceOptions>(
                 Configuration.GetSection("TestConfiguration"));
+            services.Configure<MySqlOptions>(
+                Configuration.GetSection("MySqlOptions"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
