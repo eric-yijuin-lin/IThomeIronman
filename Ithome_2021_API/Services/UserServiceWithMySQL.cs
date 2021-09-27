@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
 using MySqlConnector;
+using System.Data;
 
 namespace Ithome_2021_API.Services
 {
