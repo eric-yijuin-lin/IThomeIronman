@@ -28,14 +28,19 @@ namespace Ithome_2021_API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
-            {
-                builder.AllowAnyOrigin()
-                       .AllowAnyMethod()
-                       .AllowAnyHeader();
-            }));
 
             services.AddControllers();
+            services.AddCors(option =>
+            {
+                option.AddPolicy("testPolicy", policy =>
+                {
+                    policy.WithOrigins("http://localhost:4200")
+                        .WithOrigins("https://mydomain.tw")
+                        //.SetIsOriginAllowed(origin => new Uri(origin).Host == "localhost")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+            });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Ithome_2021_API", Version = "v1" });
@@ -72,7 +77,8 @@ namespace Ithome_2021_API
 
             app.UseRouting();
 
-            app.UseCors();
+            app.UseCors("testPolicy");
+
 
             app.UseAuthorization();
 
